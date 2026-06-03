@@ -1,0 +1,36 @@
+name: Release
+
+# Push a semver tag (e.g. v0.1.1) to build the Windows installer and attach it
+# to a GitHub Release automatically.
+on:
+  push:
+    tags:
+      - 'v*'
+
+permissions:
+  contents: write
+
+jobs:
+  build-windows:
+    name: Build Windows installer
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build NSIS installer
+        run: npm run build:win
+
+      - name: Publish installer to the GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: dist/*-setup.exe
+          fail_on_unmatched_files: true
+          generate_release_notes: true

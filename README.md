@@ -1,5 +1,11 @@
 # AI Command Center
 
+[![CI](https://github.com/famouspr/AI-Command-Center/actions/workflows/ci.yml/badge.svg)](https://github.com/famouspr/AI-Command-Center/actions/workflows/ci.yml)
+[![Latest release](https://img.shields.io/github/v/release/famouspr/AI-Command-Center?sort=semver)](https://github.com/famouspr/AI-Command-Center/releases/latest)
+[![License: MIT](https://img.shields.io/github/license/famouspr/AI-Command-Center)](LICENSE)
+![Platform: Windows 10/11](https://img.shields.io/badge/platform-Windows%2010%2F11-0078D6)
+![Built with Electron, TypeScript, React](https://img.shields.io/badge/built%20with-Electron%20%C2%B7%20TypeScript%20%C2%B7%20React-3178C6)
+
 **Run ChatGPT and Claude side by side in one calm, professional desktop window — and relay prompts between them with you in control of every step.**
 
 ![AI Command Center — ChatGPT on the left, Claude on the right, and the relay control panel in the center](assets/screenshot.png)
