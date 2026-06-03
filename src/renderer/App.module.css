@@ -1,0 +1,30 @@
+.app {
+  display: grid;
+  grid-template-rows: var(--topbar-h, 44px) minmax(0, 1fr) auto;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+  background: var(--bg);
+  color: var(--text);
+}
+
+.main {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) var(--center-w, 472px) minmax(0, 1fr);
+  gap: 10px;
+  padding: 10px;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.logDock {
+  min-height: 0;
+  border-top: 1px solid var(--border);
+  background: var(--surface);
+}
+
+@media (max-width: 1240px) {
+  .main {
+    grid-template-columns: minmax(0, 1fr) 420px minmax(0, 1fr);
+  }
+}

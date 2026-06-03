@@ -1,0 +1,264 @@
+/* =========================================================================
+   AI Command Center — global stylesheet
+   Design tokens, theme overrides, modern reset, and base element styling.
+   All component styles consume these tokens via var(--...).
+   ========================================================================= */
+
+/* -------------------------------------------------------------------------
+   Design tokens
+   :root is the dark default; [data-theme="dark"] mirrors it so an explicit
+   attribute behaves identically. [data-theme="light"] overrides surfaces,
+   borders, text, and shadows while preserving accent and status colors.
+   ------------------------------------------------------------------------- */
+
+:root,
+[data-theme='dark'] {
+  /* Type stacks */
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+    Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji';
+  --font-mono: 'JetBrains Mono', ui-monospace, 'SFMono-Regular', 'SF Mono',
+    Menlo, Consolas, 'Liberation Mono', monospace;
+
+  /* Surfaces */
+  --bg: #0b0c0e;
+  --surface: #131518;
+  --surface-2: #181b20;
+  --surface-3: #21262d;
+  --elevated: #1b1f24;
+
+  /* Borders */
+  --border: rgba(255, 255, 255, 0.08);
+  --border-strong: rgba(255, 255, 255, 0.14);
+
+  /* Text */
+  --text: #e6e8eb;
+  --text-muted: #9ba1a8;
+  --text-faint: #6b7177;
+
+  /* Accent — calm indigo */
+  --accent: #6e7bf2;
+  --accent-hover: #828df6;
+  --accent-soft: rgba(110, 123, 242, 0.14);
+  --accent-contrast: #ffffff;
+
+  /* Status */
+  --success: #4ade80;
+  --warn: #fbbf24;
+  --danger: #f87171;
+
+  /* Radii */
+  --radius: 12px;
+  --radius-sm: 8px;
+  --radius-lg: 16px;
+  --radius-pill: 999px;
+
+  /* Shadows */
+  --shadow: 0 1px 2px rgba(0, 0, 0, 0.4), 0 8px 24px rgba(0, 0, 0, 0.28);
+  --shadow-lg: 0 12px 40px rgba(0, 0, 0, 0.5);
+
+  /* Layout */
+  --topbar-h: 44px;
+
+  /* Spacing scale */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+
+  color-scheme: dark;
+}
+
+[data-theme='light'] {
+  /* Surfaces */
+  --bg: #f7f8fa;
+  --surface: #ffffff;
+  --surface-2: #f1f3f5;
+  --surface-3: #e9ecef;
+  --elevated: #ffffff;
+
+  /* Borders */
+  --border: rgba(0, 0, 0, 0.09);
+  --border-strong: rgba(0, 0, 0, 0.16);
+
+  /* Text */
+  --text: #1a1d21;
+  --text-muted: #5b6168;
+  --text-faint: #8a9099;
+
+  /* Accent and status colors are intentionally preserved across themes. */
+
+  /* Lighter shadows for the light surface stack */
+  --shadow: 0 1px 2px rgba(16, 24, 40, 0.06), 0 8px 24px rgba(16, 24, 40, 0.08);
+  --shadow-lg: 0 12px 40px rgba(16, 24, 40, 0.16);
+
+  color-scheme: light;
+}
+
+/* -------------------------------------------------------------------------
+   Modern reset
+   ------------------------------------------------------------------------- */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+  overflow: hidden;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+body {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--text);
+  background: var(--bg);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+#root {
+  isolation: isolate;
+}
+
+/* Media defaults */
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+/* Inherit typography into form controls */
+input,
+button,
+textarea,
+select {
+  font: inherit;
+  color: inherit;
+}
+
+button {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+a:hover {
+  color: var(--accent-hover);
+}
+
+code,
+pre,
+kbd,
+samp {
+  font-family: var(--font-mono);
+}
+
+/* Break long words rather than overflow layout */
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  overflow-wrap: break-word;
+}
+
+/* -------------------------------------------------------------------------
+   Selection
+   ------------------------------------------------------------------------- */
+
+::selection {
+  background: var(--accent-soft);
+  color: var(--text);
+}
+
+/* -------------------------------------------------------------------------
+   Custom scrollbars — thin, transparent track, rounded thumb
+   ------------------------------------------------------------------------- */
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--surface-3) transparent;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--surface-3);
+  border-radius: var(--radius-pill);
+  border: 2px solid transparent;
+  background-clip: padding-box;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: var(--border-strong);
+  background-clip: padding-box;
+}
+
+::-webkit-scrollbar-corner {
+  background: transparent;
+}
+
+/* -------------------------------------------------------------------------
+   Focus visibility — clear ring for keyboard navigation
+   ------------------------------------------------------------------------- */
+
+:focus {
+  outline: none;
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 1px;
+  box-shadow: 0 0 0 4px var(--accent-soft);
+  border-radius: var(--radius-sm);
+}
+
+/* -------------------------------------------------------------------------
+   Reduced motion — disable transitions and animations on request
+   ------------------------------------------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
